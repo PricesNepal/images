@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brand Image Gallery</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .gallery img {
+      max-width: 150px;
+      height: auto;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+      border-color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Brand Image Gallery</h1>
+
+  <div class="gallery" id="gallery"></div>
+
+  <script>
+    const images = [
+      "acer","apple","asus","bajaj","benco","byd","dell","herobike","honda",
+      "honor","hp","hyundai","infinix","lenovo","mahindra","motorola","msi",
+      "nothing","one-plus","oppo","poco","realme","redmi","royal-enfield",
+      "samsung","suzuki","tata","tecno","tvs","toyota","vivo","yamaha",
+      "cfmoto","cg","palsonic","haier","konka","midea","panasonic","tcl",
+      "whisky","vodka","gin","rum","brandy","liqueur","tequila","wine","beer",
+      "japanese-liquor","beverages","xiaomi","hyundai-ac","hisense","lg"
+    ];
+
+    const gallery = document.getElementById("gallery");
+
+    images.forEach(name => {
+      const img = document.createElement("img");
+      img.src = `images/${name}.png`;
+      img.alt = name.replace("-", " ").toUpperCase();
+      gallery.appendChild(img);
+    });
+  </script>
+</body>
+</html>
