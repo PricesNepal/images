@@ -1,64 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brand Image Gallery</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brand Image Gallery</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      text-align: center;
-    }
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+      }
 
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-    }
+      h1 {
+        margin-top: 20px;
+      }
 
-    .gallery img {
-      max-width: 150px;
-      height: auto;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      transition: transform 0.2s;
-    }
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+      }
 
-    .gallery img:hover {
-      transform: scale(1.1);
-      border-color: #555;
-    }
-  </style>
-</head>
+      .gallery img {
+        max-width: 150px;
+        height: auto;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
 
-<body>
-  <h1>Brand Image Gallery</h1>
+      .gallery img:hover {
+        transform: scale(1.1);
+        border-color: #555;
+      }
+    </style>
+  </head>
 
-  <div class="gallery" id="gallery"></div>
+  <body>
+    <h1>Brand Image Gallery</h1>
 
-  <script>
-    const images = [
-      "acer","apple","asus","bajaj","benco","byd","dell","herobike","honda",
-      "honor","hp","hyundai","infinix","lenovo","mahindra","motorola","msi",
-      "nothing","one-plus","oppo","poco","realme","redmi","royal-enfield",
-      "samsung","suzuki","tata","tecno","tvs","toyota","vivo","yamaha",
-      "cfmoto","cg","palsonic","haier","konka","midea","panasonic","tcl",
-      "whisky","vodka","gin","rum","brandy","liqueur","tequila","wine","beer",
-      "japanese-liquor","beverages","xiaomi","hyundai-ac","hisense","lg"
-    ];
+    <div class="gallery" id="gallery"></div>
 
-    const gallery = document.getElementById("gallery");
+    <script>
+      // Base image names (no extension)
+      const images = [
+        "acer",
+        "apple",
+        "asus",
+        "bajaj",
+        "benco",
+        "byd",
+        "dell",
+        "herobike",
+        "honda",
+        "honor",
+        "hp",
+        "hyundai",
+        "infinix",
+        "lenovo",
+        "mahindra",
+        "motorola",
+        "msi",
+        "nothing",
+        "one-plus",
+        "oppo",
+        "poco",
+        "realme",
+        "redmi",
+        "royal-enfield",
+        "samsung",
+        "suzuki",
+        "tata",
+        "tecno",
+        "tvs",
+        "toyota",
+        "vivo",
+        "yamaha",
+        "cfmoto",
+        "cg",
+        "palsonic",
+        "haier",
+        "konka",
+        "midea",
+        "panasonic",
+        "tcl",
+        "whisky",
+        "vodka",
+        "gin",
+        "rum",
+        "brandy",
+        "liqueur",
+        "tequila",
+        "wine",
+        "beer",
+        "japanese-liquor",
+        "beverages",
+        "xiaomi",
+        "hyundai-ac",
+        "hisense",
+        "lg",
+        "100-es",
+        "125",
+        "125-disc-red",
+        "160-street",
+        "220-cruise",
+        "220f",
+        "400-bs6",
+        "FPS_1640_997_150R",
+        "n125",
+        "n160-ug",
+        "ns-200-nepal",
+        "pulsar-n-150",
+        "pulsar-n-250-nepal",
+        "pulsar-ns125-abs-fi-bs6",
+        "pulsar-ns-400-z",
+      ];
 
-    images.forEach(name => {
-      const img = document.createElement("img");
-      img.src = `images/${name}.png`;
-      img.alt = name.replace("-", " ").toUpperCase();
-      gallery.appendChild(img);
-    });
-  </script>
-</body>
+      // Supported formats (priority order)
+      const formats = ["webp", "png", "jpg", "jpeg"];
+
+      const gallery = document.getElementById("gallery");
+
+      function loadImage(name, index = 0) {
+        if (index >= formats.length) return;
+
+        const img = new Image();
+        img.src = `images/${name}.${formats[index]}`;
+
+        img.onload = () => {
+          img.alt = name.replace("-", " ").toUpperCase();
+          gallery.appendChild(img);
+        };
+
+        img.onerror = () => {
+          loadImage(name, index + 1); // try next format
+        };
+      }
+
+      // Load all images
+      images.forEach((name) => loadImage(name));
+    </script>
+  </body>
 </html>
